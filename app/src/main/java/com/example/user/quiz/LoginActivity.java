@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -88,13 +89,8 @@ public class LoginActivity extends AppCompatActivity {
             singUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mLogin = ((EditText) findViewById(R.id.login)).getText().toString();
-                    mPassword = ((EditText) findViewById(R.id.password)).getText().toString();
-                    if ("".equals(mLogin) || "".equals(mPassword)) {
-                        Toast.makeText(getApplicationContext(), "Одно из полей не заполненно. Пожалуйста, заполните все поля и повторите отправку", Toast.LENGTH_LONG).show();
-                    } else {
-                        addUser();
-                    }
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -103,26 +99,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private void addUser() {
-        mAuth = FirebaseAuth.getInstance();
-        mUser = mAuth.getCurrentUser();
-        com.google.android.gms.tasks.Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(mLogin, mPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    //Toast.makeText(getApplicationContext(), "Регистрация успешна", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                    intent.putExtra("PARAM", 2);
-
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Регистрация провалена", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void singInUser() {
