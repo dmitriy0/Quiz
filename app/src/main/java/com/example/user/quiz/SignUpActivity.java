@@ -49,8 +49,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if ("".equals(mLogin) || "".equals(mPassword) || "".equals(mPasswordRepeat)) {
                     Toast.makeText(getApplicationContext(), "Одно из полей не заполненно. Пожалуйста, заполните все поля и повторите отправку", Toast.LENGTH_LONG).show();
                 } else{ if (mPasswordRepeat.equals(mPassword)){
-                        addUser();
-                    }else {
+                    addUser();
+                }else {
                     Toast.makeText(getApplicationContext(), "Пароли не совпадают, повторите попытку", Toast.LENGTH_LONG).show();
                 }
                 }
